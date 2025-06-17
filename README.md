@@ -116,6 +116,7 @@ We implement a **medallion architecture** to structure and organize data effecti
 6. Schedule the pipeline to run at desired intervals (e.g., daily).
 
 ---
+![Azure Synapse](https://github.com/user-attachments/assets/d852b130-ca07-498e-8520-d2df1f13103b)
 
 ## Step 8: Integrate Azure Synapse Analytics
 1. **Create a Synapse Workspace**:
