@@ -38,18 +38,14 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 1: Create an Azure Account
-1. Sign up for an Azure account if you do not already have one.
 
----
-
-## Step 2: Create a Databricks Resource
+## Step 1: Create a Databricks Resource
 1. Create a Databricks resource in Azure.
 2. Select the **Standard LTS (Long Term Support)** tier. Avoid using ML or other specialized tiers.
 
 ---
 
-## Step 3: Set Up a Storage Account
+## Step 2: Set Up a Storage Account
 1. Create a Storage Account and enable **hierarchical namespaces** in the advanced settings.
 2. Navigate to the Storage Account resource:
    - Go to **Data Storage > Containers > + Containers**.
@@ -58,13 +54,12 @@ We implement a **medallion architecture** to structure and organize data effecti
    - Go to **IAM > Add role assignment > Storage Blob Data Contributor**.
    - Click **Next > Managed Identity > Select Members**.
    - Select **Access Connector for Azure Databricks** as the managed identity.
-   - Click **Review + Assign**.
 
 ---
 
-## Step 4: Configure Databricks
+## Step 3: Configure Databricks
 1. Open the Databricks resource and click **Launch Workspace**.
-2. Start a compute instance (this may take a few minutes).
+2. Start a compute instance 
 3. Set up external data access:
    - Go to **Catalog > External Data > Credentials > Create Credential**.
    - For the **Access Connector ID**, use the Resource ID of the Access Connector:
@@ -73,19 +68,17 @@ We implement a **medallion architecture** to structure and organize data effecti
 4. Define external locations:
    - Navigate to **External Data > External Locations**.
    - Assign a name, select the storage credential, and specify the URL (use the container name and storage account name for `bronze`, `silver`, and `gold`).
-5. For detailed steps, refer to this helpful video: [Pathfinder Analytics](https://www.youtube.com/watch?v=kRfNXFh9T3U).
 
 ---
 
-## Step 5: Create and Execute Notebooks
+## Step 4: Create and Execute Notebooks
 1. In the Databricks workspace, create a notebook for each layer (`bronze`, `silver`, `gold`).
-   - Add the relevant code for `bronze` from GitHub.
    - Execute the notebook and refresh the Storage Account containers to verify updates.
    - Repeat the process for `silver` and `gold` notebooks, adding the corresponding code.
 
 ---
 
-## Step 6: Install Required Libraries
+## Step 5: Install Required Libraries
 1. Before running the `gold` notebook, install the `reverse_geocoder` library.
    - Navigate to **Compute > Cluster > Libraries > + Install New Library**.
    - Select **Source: PyPI** and enter **reverse_geocoder**.
@@ -94,7 +87,7 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 7: Optimize Gold Notebook Execution
+## Step 6: Optimize Gold Notebook Execution
 1. During execution, you may encounter performance bottlenecks with the `reverse_geocoder` Python UDF due to its non-thread-safe nature in distributed setups.
    - Replace the UDF with alternatives like:
      - **Precomputed lookup tables**.
@@ -103,7 +96,10 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 8: Set Up Azure Data Factory (ADF)
+![data factory2](https://github.com/user-attachments/assets/a2c46f72-1595-4590-9d54-985300d29afa)
+
+
+## Step 7: Set Up Azure Data Factory (ADF)
 1. Create a new Azure Data Factory instance (in a new Resource Group if needed).
 2. Launch the ADF studio and create a pipeline:
    - Drag the **Notebook** activity into the pipeline and configure it to run Databricks notebooks.
@@ -118,7 +114,7 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 9: Integrate Azure Synapse Analytics
+## Step 8: Integrate Azure Synapse Analytics
 1. **Create a Synapse Workspace**:
    - Link it to the existing Storage Account.
    - Configure a file system and assign necessary permissions.
@@ -146,9 +142,7 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 10: Visualization Options
-1. While Power BI can be used, it is not ideal for Mac users. Instead, consider using Synapse SQL for analytics and queries.
-2. Export data for further visualization or reporting if needed.
+## Step 9: Visualization Options via Power BI 
 
 ---
 
