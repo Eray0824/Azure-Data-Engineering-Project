@@ -146,8 +146,7 @@ We implement a **medallion architecture** to structure and organize data effecti
 
 ---
 
-## Step 9: Visualization Options via Power BI 
-
+## Optional Step 9: Visualization via Power BI 
 ---
 
 ## Key Considerations
