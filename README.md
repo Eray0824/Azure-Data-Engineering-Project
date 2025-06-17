@@ -2,6 +2,9 @@
 
 ## Overview and Architecture
 
+![399150923-bdadd2e0-89be-4683-b53b-fe331be6f6bf](https://github.com/user-attachments/assets/6d2829f4-4454-4b63-a3ae-919f58bfe321)
+
+
 ### Business Case
 
 Earthquake data is incredibly valuable for understanding seismic events and mitigating risks. Government agencies, research institutions, and insurance companies rely on up-to-date information to plan emergency responses and assess risks. With this automated pipeline, we ensure these stakeholders get the latest data in a way that’s easy to understand and ready to use, saving time and improving decision-making.
